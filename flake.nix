@@ -26,7 +26,7 @@
                                                                 ${ pkgs.coreutils }/bin/echo ${ ( lib { } ) } > $out &&
                                                                     ${ pkgs.coreutils }/bin/cat $out &&
                                                                     ALPHA='${ lib { } }' &&
-                                                                    if [ "${ builtins.concatStringsSep "" [ "$" "{" "ALPHA" "}" ] }" != "WRONG" ]
+                                                                    if [ "${ builtins.concatStringsSep "" [ "$" "{" "ALPHA" "}" ] }" != $( ${ pkgs.coreutils }/bin/cat ${ self + "/expected/main.sh" } ) ]
                                                                     then
                                                                         exit 64
                                                                     fi
