@@ -23,15 +23,13 @@
                                                     {
                                                         installPhase =
                                                             ''
-                                                                ${ pkgs.coreutils }/bin/touch $out &&
-                                                                    ${ pkgs.coreutils }/bin/echo ${ lib { } } &&
+                                                                ${ pkgs.coreutils }/bin/echo ${ ( lib { } ) } > $out &&
+                                                                    ${ pkgs.coreutils }/bin/cat $out &&
                                                                     ALPHA='${ lib { } }' &&
-                                                                    if [ "${ builtins.concatStringsSep "" [ "$" "{" "ALPHA" "}" ] }" == "WRONG" ]
+                                                                    if [ "${ builtins.concatStringsSep "" [ "$" "{" "ALPHA" "}" ] }" != "WRONG" ]
                                                                     then
-                                                                        ${ pkgs.coreutils }/bin/rm $out &&
                                                                         exit 64
-                                                                    fi &&
-                                                                    exit 63
+                                                                    fi
                                                             '' ;
                                                         name = "main" ;
                                                         src = ./. ;
